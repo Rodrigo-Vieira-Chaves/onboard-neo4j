@@ -1,7 +1,7 @@
 import { Controller, Get, Route } from 'tsoa';
 import { HelloWorldService } from './hello-world-service';
 
-@Route('HelloWorld')
+@Route('helloworld')
 export class HelloWorldController extends Controller {
   @Get()
   public getHelloWorld(): string {
