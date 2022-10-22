@@ -4,7 +4,7 @@ import { HelloWorldService } from './hello-world-service';
 @Route('helloworld')
 export class HelloWorldController extends Controller {
   @Get()
-  public getHelloWorld(): string {
-    return new HelloWorldService().get();
+  public async getHelloWorld(): Promise<string> {
+    return await new HelloWorldService().get();
   }
 }
