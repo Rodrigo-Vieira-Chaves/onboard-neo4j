@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/Rodrigo-Vieira-Chaves/onboard-neo4j#readme",
   "dependencies": {
+    "@node-ts/bus-core": "1.0.13",
+    "@node-ts/bus-messages": "1.0.4",
     "dotenv": "16.0.3",
     "express": "4.18.2",
     "neo4j-driver": "5.1.0",
