@@ -6,10 +6,4 @@ export class FriendshipService {
   public async create(friendshipCreation: FriendshipCreation): Promise<void> {
     await bus.send(new CreateFriendshipCommand(friendshipCreation));
   }
-
-  public get() {
-    console.log('oi');
-
-    return 'OI';
-  }
 }
