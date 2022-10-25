@@ -25,6 +25,7 @@ describe('User Creation Handler Test', () => {
     const queryResult = await session.run(`MATCH (user:${label}) RETURN user`);
     const userInDatabase = queryResult.records[0].toObject();
 
+    expect(queryResult.records.length).to.be.eq(1);
     expect(userInDatabase.user.labels[0]).to.be.eq(label);
     expect(userInDatabase.user.properties).to.be.deep.eq({ name, email });
   });
