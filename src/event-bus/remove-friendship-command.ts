@@ -1,11 +1,11 @@
 import { Command } from '@node-ts/bus-messages';
 import { FriendshipUsersId } from '../routes/create-friendship/friendship';
 
-export class CreateFriendshipCommand extends Command {
+export class RemoveFriendshipCommand extends Command {
   $version = 1;
-  $name = 'Create Friendship';
+  $name = 'Remove Friendship';
 
-  constructor(public friendshipCreation: FriendshipUsersId) {
+  constructor(public friendshipRemoval: FriendshipUsersId) {
     super();
   }
 }

@@ -14,14 +14,14 @@ import * as express from 'express';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "Pick_CreateFriendship.userId1-or-userId2_": {
+    "Pick_Friendship.userId1-or-userId2_": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"userId1":{"dataType":"double","required":true},"userId2":{"dataType":"double","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "FriendshipCreation": {
+    "FriendshipUsersId": {
         "dataType": "refAlias",
-        "type": {"ref":"Pick_CreateFriendship.userId1-or-userId2_","validators":{}},
+        "type": {"ref":"Pick_Friendship.userId1-or-userId2_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Pick_User.name-or-email_": {
@@ -50,7 +50,7 @@ export function RegisterRoutes(app: express.Router) {
 
             function FriendshipController_createFriendship(request: any, response: any, next: any) {
             const args = {
-                    friendshipCreation: {"in":"body","name":"friendshipCreation","required":true,"ref":"FriendshipCreation"},
+                    friendshipCreation: {"in":"body","name":"friendshipCreation","required":true,"ref":"FriendshipUsersId"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -69,12 +69,13 @@ export function RegisterRoutes(app: express.Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/friendship',
+        app.delete('/friendship',
             ...(fetchMiddlewares<RequestHandler>(FriendshipController)),
-            ...(fetchMiddlewares<RequestHandler>(FriendshipController.prototype.getFriendship)),
+            ...(fetchMiddlewares<RequestHandler>(FriendshipController.prototype.removeFriendship)),
 
-            function FriendshipController_getFriendship(request: any, response: any, next: any) {
+            function FriendshipController_removeFriendship(request: any, response: any, next: any) {
             const args = {
+                    friendshipRemoval: {"in":"body","name":"friendshipRemoval","required":true,"ref":"FriendshipUsersId"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -86,7 +87,7 @@ export function RegisterRoutes(app: express.Router) {
                 const controller = new FriendshipController();
 
 
-              const promise = controller.getFriendship.apply(controller, validatedArgs as any);
+              const promise = controller.removeFriendship.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
