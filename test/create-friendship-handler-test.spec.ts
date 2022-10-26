@@ -36,16 +36,15 @@ describe('Friendship Creation Handler Test', () => {
     await handlerForCreateFriendship(new CreateFriendshipCommand({ userId1, userId2 }));
 
     const queryResult = await session.run(
-      `MATCH (user1:USER)-[relation1:FRIENDS_TO]->(user2:USER),
-             (user2:USER)-[relation2:FRIENDS_TO]->(user1:USER) 
-        RETURN relation1, relation2`,
+      `MATCH (user1:USER)-[relation:FRIENDS_TO]-(user2:USER)
+       WHERE ID(user1) = $userId1 AND ID(user2) = $userId2
+       RETURN relation`,
+      { userId1, userId2 },
     );
 
     const relationsInDatabase = queryResult.records[0].toObject();
 
-    expect(Number(relationsInDatabase.relation1.startNodeElementId)).to.be.eq(userId2);
-    expect(Number(relationsInDatabase.relation1.endNodeElementId)).to.be.eq(userId1);
-    expect(Number(relationsInDatabase.relation2.startNodeElementId)).to.be.eq(userId1);
-    expect(Number(relationsInDatabase.relation2.endNodeElementId)).to.be.eq(userId2);
+    expect(Number(relationsInDatabase.relation.startNodeElementId)).to.be.eq(userId1);
+    expect(Number(relationsInDatabase.relation.endNodeElementId)).to.be.eq(userId2);
   });
 });
