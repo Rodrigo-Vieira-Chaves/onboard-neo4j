@@ -4,9 +4,9 @@ import { RemoveFriendshipCommand } from './remove-friendship-command';
 
 export async function handlerForRemoveFriendship(command: RemoveFriendshipCommand) {
   await session.run(
-    `MATCH (user1:USER)-[relation1:FRIENDS_TO]->(user2:USER), (user2:USER)-[relation2:FRIENDS_TO]->(user1:USER)
+    `MATCH (user1:USER)-[relation:FRIENDS_TO]-(user2:USER)
      WHERE ID(user1) = $userId1 AND ID(user2) = $userId2
-     DELETE relation1, relation2`,
+     DELETE relation`,
     { userId1: command.friendshipRemoval.userId1, userId2: command.friendshipRemoval.userId2 },
   );
 }

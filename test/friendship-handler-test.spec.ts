@@ -54,16 +54,15 @@ describe('Friendship Handler Test', () => {
     await session.run(
       `MATCH (user1:USER ), (user2:USER) 
        WHERE ID(user1) = $userId1 AND ID(user2) = $userId2
-       CREATE (user1) -[relation1:FRIENDS_TO]-> (user2), (user2) -[relation2:FRIENDS_TO]-> (user1)`,
+       CREATE (user1) -[relation1:FRIENDS_TO]-> (user2)`,
       { userId1, userId2 },
     );
 
     await handlerForRemoveFriendship(new RemoveFriendshipCommand({ userId1, userId2 }));
 
     const queryResult = await session.run(
-      `MATCH (user1:USER)-[relation1:FRIENDS_TO]->(user2:USER),
-             (user2:USER)-[relation2:FRIENDS_TO]->(user1:USER) 
-        RETURN relation1, relation2`,
+      `MATCH (user1:USER)-[relation:FRIENDS_TO]-(user2:USER) 
+       RETURN relation`,
     );
 
     const relationsInDatabase = queryResult.records;
