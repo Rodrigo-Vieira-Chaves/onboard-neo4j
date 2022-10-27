@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 dotenv.config({ path: `${process.cwd()}/.env` });
 
-import { RegisterRoutes } from './router/routes';
 import express, { json, urlencoded } from 'express';
 import { eventBusStart } from './event-bus/init-bus';
+import { RegisterRoutes } from './router/routes';
 
 const server = express();
 
