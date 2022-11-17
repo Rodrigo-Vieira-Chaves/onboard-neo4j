@@ -1,8 +1,13 @@
 {
    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+         "@mattermost/types/*": ["node_modules/@mattermost/types/lib/*"]
+      },
       "lib": [
          "es5",
-         "es6"
+         "es6",
+         "DOM"
       ],
       "target": "ES2020",
       "module": "CommonJS",
