@@ -1,3 +1,4 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config({ path: `${process.cwd()}/.env` });
 
@@ -8,6 +9,7 @@ import { RegisterRoutes } from './router/routes';
 const server = express();
 
 server.use(json());
+server.use(cors());
 server.use(urlencoded({ extended: true }));
 
 RegisterRoutes(server);
